@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Administración · Portal de Becas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="admin-body">
+
+  <!-- =====================================================
+       LOGIN ADMINISTRADOR
+       ===================================================== -->
+
+  <div id="adminLogin" class="admin-login-wrap">
+
+    <div class="admin-login-card">
+
+      <div class="brand admin-brand">
+        <img
+          src="logo.png"
+          alt="Legado Bateas"
+          class="brand-logo"
+        >
+      </div>
+
+      <span class="card-label">
+        ACCESO ADMINISTRATIVO
+      </span>
+
+      <h1>
+        Panel de solicitudes
+      </h1>
+
+      <p>
+        Ingresa tus credenciales para consultar y gestionar las postulaciones.
+      </p>
+
+      <form id="adminLoginForm">
+
+        <label for="adminUser">
+          Correo electrónico
+        </label>
+
+        <input
+          id="adminUser"
+          type="email"
+          required
+          autocomplete="username"
+          placeholder="Correo electrónico"
+        >
+
+        <label for="adminPassword">
+          Contraseña
+        </label>
+
+        <input
+          id="adminPassword"
+          type="password"
+          required
+          autocomplete="current-password"
+          placeholder="Contraseña"
+        >
+
+        <button
+          class="primary-btn"
+          type="submit"
+        >
+          Ingresar
+          <span>→</span>
+        </button>
+
+        <div
+          id="adminLoginMessage"
+          class="message"
+        ></div>
+
+      </form>
+
+      <a
+        href="./index.html"
+        class="back-home"
+      >
+        ← Volver al portal
+      </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+        PANEL ADMINISTRATIVO
+        ===================================================== -->
+
+    <div id="adminApp" class="hidden">
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="brand">
+
+          <img
+            src="logo.png"
+            alt="Legado Bateas"
+            class="brand-logo"
+          >
+
+        </div>
+
+        <div class="admin-actions">
+
+          <span id="adminUserLabel">
+          </span>
+
+          <button
+            id="adminLogout"
+            class="ghost-btn"
+          >
+            Cerrar sesión
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- CONTENIDO -->
+
+      <main class="admin-main">
+
+        <!-- ENCABEZADO -->
+
+        <div class="admin-heading">
+
+          <div>
+
+            <span class="eyebrow">
+              GESTIÓN DE POSTULACIONES
+            </span>
+
+            <h1>
+              Solicitudes de beca
+            </h1>
+
+            <p>
+              Consulta, filtra, actualiza o elimina las inscripciones recibidas.
+            </p>
+
+          </div>
+
+          <button
+            id="exportBtn"
+            class="export-btn"
+          >
+            ↓ Exportar CSV
+          </button>
+
+        </div>
+
+
+        <!-- =================================================
+            ESTADÍSTICAS
+            ================================================= -->
+
+        <section class="stats-grid">
+
+          <div class="stat-card">
+
+            <span>
+              Total solicitudes
+            </span>
+
+            <strong id="statTotal">
+              0
+            </strong>
+
+            <small>
+              Registradas
+            </small>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span>
+              Pendientes
+            </span>
+
+            <strong id="statPending">
+              0
+            </strong>
+
+            <small>
+              Por revisar
+            </small>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span>
+              En revisión
+            </span>
+
+            <strong id="statReview">
+              0
+            </strong>
+
+            <small>
+              En proceso
+            </small>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span>
+              Aprobadas
+            </span>
+
+            <strong id="statApproved">
+              0
+            </strong>
+
+            <small>
+              Postulaciones aprobadas
+            </small>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+            TABLA DE POSTULACIONES
+            ================================================= -->
+
+        <section class="admin-panel">
+
+          <!-- TOOLBAR -->
+
+          <div class="toolbar">
+
+            <div class="search-box">
+
+              <span>
+                ⌕
+              </span>
+
+              <input
+                id="searchInput"
+                type="text"
+                placeholder="Buscar por DNI, nombre o código..."
+              >
+
+            </div>
+
+
+            <select id="statusFilter">
+
+              <option value="">
+                Todos los estados
+              </option>
+
+              <option value="Pendiente">
+                Pendiente
+              </option>
+
+              <option value="En revisión">
+                En revisión
+              </option>
+
+              <option value="Aprobada">
+                Aprobada
+              </option>
+
+              <option value="Observada">
+                Observada
+              </option>
+
+            </select>
+
+
+            <button
+              id="refreshBtn"
+              class="ghost-btn"
+            >
+              ↻ Actualizar
+            </button>
+
+          </div>
+
+
+          <!-- TABLA -->
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Código
+                  </th>
+
+                  <th>
+                    Apoderado
+                  </th>
+
+                  <th>
+                    Estudiante
+                  </th>
+
+                  <th>
+                    DNI estudiante
+                  </th>
+
+                  <th>
+                    Último año
+                  </th>
+
+                  <th>
+                    Fecha
+                  </th>
+
+                  <th>
+                    Estado
+                  </th>
+
+                  <th>
+                    Acciones
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="applicationsBody">
+
+                <tr>
+
+                  <td
+                    colspan="8"
+                    class="empty"
+                  >
+                    Cargando solicitudes...
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+
+
+    <!-- =====================================================
+        MODAL DETALLE
+        ===================================================== -->
+
+    <div
+      id="detailModal"
+      class="modal hidden"
+    >
+
+      <div class="modal-card">
+
+        <button
+          id="closeModal"
+          class="modal-close"
+          type="button"
+        >
+          ×
+        </button>
+
+        <span class="card-label">
+          DETALLE DE SOLICITUD
+        </span>
+
+        <h2 id="detailCode">
+        </h2>
+
+
+        <div
+          id="detailContent"
+          class="detail-grid"
+        >
+        </div>
+
+
+        <div class="modal-footer">
+
+          <label for="detailStatus">
+            Estado de la solicitud
+          </label>
+
+          <select id="detailStatus">
+
+            <option value="Pendiente">
+              Pendiente
+            </option>
+
+            <option value="En revisión">
+              En revisión
+            </option>
+
+            <option value="Aprobada">
+              Aprobada
+            </option>
+
+            <option value="Observada">
+              Observada
+            </option>
+
+          </select>
+
+
+          <button
+            id="saveStatus"
+            class="primary-btn"
+            type="button"
+          >
+            Guardar estado
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+        JAVASCRIPT
+        ===================================================== -->
+
+    <script
+      type="module"
+      src="admin.js"
+    ></script>
+
+  </body>
+
+  </html>

@@ -1,0 +1,215 @@
+/* ===================================================================
+   Legado Bateas · Portal de becas
+   Sistema visual sobrio / corporativo — la UI calla para que el logo hable.
+   =================================================================== */
+
+:root{
+  --bg:#f3f6fb;
+  --surface:#ffffff;
+  --surface-2:#f8fafd;
+  --ink:#15263f;
+  --text:#46536580;      /* fallback abajo */
+  --text:#465365;
+  --muted:#7b8698;
+  --line:#e5eaf1;
+  --line-strong:#d5dce7;
+  --primary:#133a6b;
+  --primary-hover:#0f2f57;
+  --accent:#1466d6;
+  --accent-soft:#eaf2fc;
+  --coral:#ef6a5b;
+  --coral-soft:#fdeeec;
+  --ring:0 0 0 3px rgba(20,102,214,.16);
+  --shadow-sm:0 1px 2px rgba(18,35,60,.05);
+  --shadow:0 1px 2px rgba(18,35,60,.05), 0 12px 28px rgba(18,35,60,.06);
+  --r:12px;
+  --r-sm:9px;
+  --maxw:1120px;
+}
+
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:14px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+img{display:block}
+h1,h2,h3{margin:0;color:var(--ink);font-weight:700;letter-spacing:-.01em;line-height:1.2}
+p{margin:0}
+:focus-visible{outline:none;box-shadow:var(--ring)}
+.hidden{display:none!important}
+
+/* Franja de marca fina en el borde superior */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:3px;background:var(--accent);z-index:100}
+
+/* ---------- Etiquetas ---------- */
+.eyebrow,.card-label{
+  display:inline-block;
+  font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);
+}
+
+/* ---------- Marca / logo ---------- */
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-logo{height:52px;width:auto;object-fit:contain}
+.brand strong{display:block;font-size:14px;font-weight:700;color:var(--ink);line-height:1.1}
+.brand span{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ---------- Barra superior ---------- */
+.topbar{
+  height:74px;background:var(--surface);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(16px,5vw,40px);
+  position:sticky;top:0;z-index:20;
+}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.admin-link{
+  font-size:12px;font-weight:600;color:var(--text);
+  padding:9px 15px;border:1px solid var(--line-strong);border-radius:var(--r-sm);
+  transition:.16s ease;
+}
+.admin-link:hover{background:var(--accent-soft);border-color:#bcd3f0;color:var(--accent)}
+
+/* ---------- Botones ---------- */
+.primary-btn{
+  display:block;width:100%;height:46px;
+  border:0;border-radius:var(--r-sm);
+  background:var(--primary);color:#fff;
+  font-size:13px;font-weight:600;text-align:left;
+  padding:0 18px;line-height:46px;
+  transition:background .16s ease;
+}
+.primary-btn:hover{background:var(--primary-hover)}
+.primary-btn span{float:right;opacity:.8}
+.ghost-btn{
+  height:40px;padding:0 16px;
+  border:1px solid var(--line-strong);background:var(--surface);
+  border-radius:var(--r-sm);color:var(--text);
+  font-size:12px;font-weight:600;transition:.16s ease;
+}
+.ghost-btn:hover{background:var(--surface-2);border-color:#c4cedb}
+
+/* ---------- Campos ---------- */
+label{display:block;font-size:12px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.field input,.field textarea,.input-wrap input{
+  width:100%;height:46px;
+  border:1px solid var(--line-strong);border-radius:var(--r-sm);
+  padding:0 14px;background:var(--surface);color:var(--ink);font-size:13px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.field input::placeholder,.input-wrap input::placeholder{color:#9aa4b2}
+.field input:focus,.input-wrap input:focus{border-color:var(--accent);box-shadow:var(--ring)}
+.field i{color:var(--coral);font-style:normal}
+
+/* ---------- Mensajes ---------- */
+.message{font-size:12px;margin-top:12px;min-height:16px;color:var(--coral)}
+.message.ok{color:#1a8a57}
+
+/* ---------- Tarjetas ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+
+/* ===================================================================
+   Portal público
+   =================================================================== */
+.page-shell{min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
+.main{width:min(var(--maxw),92%);margin:0 auto;flex:1;padding:56px 0}
+
+/* Hero + acceso */
+.auth-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.hero-copy .eyebrow{margin-bottom:14px}
+.hero-copy h1{font-size:clamp(30px,3.6vw,44px);letter-spacing:-.02em;color:var(--ink);margin:0 0 16px}
+.hero-copy h1 span{color:var(--accent)}
+.hero-copy>p{font-size:15px;color:var(--text);max-width:480px}
+.hero-points{margin-top:32px;display:grid}
+.hero-points div{display:flex;align-items:center;gap:14px;padding:13px 0;border-top:1px solid var(--line)}
+.hero-points div:last-child{border-bottom:1px solid var(--line)}
+.hero-points b{flex:none;width:26px;font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.hero-points span{font-size:13px;color:var(--ink);font-weight:500}
+
+.login-card,.form-card{padding:32px}
+.card-icon{width:38px;height:38px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:18px;margin-bottom:20px}
+.login-card .card-label{margin-bottom:8px}
+.login-card h2,.form-card h2{font-size:20px;margin:6px 0}
+.muted{font-size:13px;color:var(--muted);margin:0 0 22px}
+.input-wrap{position:relative}
+.input-wrap span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:10px;color:#9aa4b2}
+.input-wrap input{padding-right:64px}
+.login-card form .primary-btn{margin-top:18px}
+.privacy-note{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;line-height:1.6;color:var(--muted)}
+
+/* Bienvenida + pasos */
+.welcome{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:28px}
+.welcome .eyebrow{margin-bottom:10px}
+.welcome h1{font-size:28px;letter-spacing:-.02em}
+.welcome h1 span{color:var(--accent)}
+.welcome p{color:var(--muted);margin:8px 0 0;font-size:13px}
+
+.steps{display:flex;gap:26px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.step{display:flex;gap:9px;align-items:center;padding:0 2px 14px;color:var(--muted);font-size:12px;font-weight:500}
+.step b{font-variant-numeric:tabular-nums;font-weight:700}
+.step.active{color:var(--accent);box-shadow:inset 0 -2px 0 var(--accent)}
+
+/* Formulario */
+.section-title{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:24px}
+.section-title h2{margin-top:6px}
+.required{font-size:11px;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.full{grid-column:1/-1}
+.field{margin:0}
+
+.academic-box{margin-top:22px;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.check-icon{grid-column:1;grid-row:1;width:36px;height:36px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700}
+.academic-heading{grid-column:2;grid-row:1}
+.academic-heading strong{font-size:13px;color:var(--ink)}
+.academic-heading p{margin:2px 0 0;font-size:11px;color:var(--muted)}
+.academic-options{grid-column:2;grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.academic-option{margin:0;cursor:pointer}
+.academic-option input{position:absolute;opacity:0;pointer-events:none}
+.academic-option span{display:flex;flex-direction:column;gap:3px;min-height:54px;justify-content:center;padding:10px 14px;border:1px solid var(--line-strong);border-radius:var(--r-sm);background:var(--surface);color:var(--text);font-size:12px;line-height:1.35;transition:.16s ease}
+.academic-option span b{color:var(--ink);font-weight:700}
+.academic-option input:checked+span{border-color:var(--accent);background:var(--accent-soft);color:var(--ink);box-shadow:var(--ring)}
+.academic-option input:focus-visible+span{box-shadow:var(--ring)}
+.academic-box>.field{grid-column:1/-1;margin-top:6px}
+
+.form-actions{display:flex;justify-content:space-between;gap:14px;margin-top:26px}
+.form-actions .primary-btn{width:auto;min-width:220px}
+
+/* Éxito */
+.success-wrap{max-width:620px;margin:40px auto}
+.success-card{text-align:center;padding:44px}
+.success-icon{width:60px;height:60px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:26px;font-weight:700;margin:0 auto 18px}
+.success-card .card-label{margin-bottom:8px}
+.success-card h1{font-size:24px;margin:8px 0 10px}
+.success-card p{color:var(--muted);font-size:13px}
+.code-box{margin:26px 0;background:var(--surface-2);border:1px dashed var(--line-strong);border-radius:var(--r-sm);padding:16px}
+.code-box span{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.code-box strong{font-size:19px;letter-spacing:.04em;color:var(--ink)}
+.success-card .primary-btn{max-width:300px;margin:0 auto;text-align:center}
+.success-card .primary-btn span{float:none;margin-left:8px;opacity:.8}
+
+footer{text-align:center;padding:22px;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}
+
+/* ---------- Responsive ---------- */
+@media(max-width:850px){
+  .auth-grid{grid-template-columns:1fr;gap:30px}
+  .main{width:92%;padding:36px 0}
+  .welcome{flex-direction:column;align-items:flex-start;gap:14px}
+  .form-grid{grid-template-columns:1fr}
+  .academic-options{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .login-card,.form-card,.success-card{padding:22px}
+  .form-actions{flex-direction:column}
+  .form-actions .primary-btn{width:100%}
+  .brand-logo{height:44px}
+}

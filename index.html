@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Becas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <img src="logo.png" alt="Legado Bateas — Programa de becas 2026" class="brand-logo">
+      </div>
+      <div class="topbar-right">
+        <a href="admin.html" class="admin-link">Administración</a>
+      </div>
+    </header>
+
+    <main class="main">
+      <section id="loginView" class="auth-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Inscripciones 2026</span>
+          <h1>Una oportunidad más para<br><span>seguir creciendo.</span></h1>
+          <p>Ingresa con tu DNI para iniciar la inscripción de tu hijo o hija al programa de becas.</p>
+          <div class="hero-points">
+            <div><b>01</b><span>Ingreso con DNI</span></div>
+            <div><b>02</b><span>Completa los datos del estudiante</span></div>
+            <div><b>03</b><span>Confirma la inscripción</span></div>
+          </div>
+        </div>
+
+        <div class="card login-card">
+          <div class="card-icon">→</div>
+          <span class="card-label">ACCESO</span>
+          <h2>Ingresa al portal</h2>
+          <p class="muted">Utiliza el DNI registrado para continuar.</p>
+
+          <form id="loginForm">
+            <label for="loginDni">DNI del padre/madre/apoderado</label>
+            <div class="input-wrap">
+              <input id="loginDni" name="dni" inputmode="numeric" maxlength="8"
+                     placeholder="Ingresa tu DNI" autocomplete="off" required>
+              <span>8 dígitos</span>
+            </div>
+            <button class="primary-btn" type="submit">
+              Continuar <span>→</span>
+            </button>
+            <div id="loginMessage" class="message"></div>
+          </form>
+
+          <div class="privacy-note">Tus datos serán utilizados exclusivamente para el proceso de inscripción.</div>
+        </div>
+      </section>
+
+      <section id="formView" class="hidden">
+        <div class="welcome">
+          <div>
+            <span class="eyebrow">INSCRIPCIÓN</span>
+            <h1>¡Bienvenido, <span id="welcomeName"></span>!</h1>
+            <p>Completa la información del estudiante para continuar con la postulación.</p>
+          </div>
+          <button id="logoutBtn" class="ghost-btn">Cerrar sesión</button>
+        </div>
+
+        <div class="steps">
+          <div class="step active"><b>01</b><span>Datos del estudiante</span></div>
+          <div class="step"><b>02</b><span>Confirmación</span></div>
+        </div>
+
+        <div class="card form-card">
+          <div class="section-title">
+            <div>
+              <span class="card-label">DATOS DEL ESTUDIANTE</span>
+              <h2>¿A quién deseas inscribir?</h2>
+            </div>
+            <span class="required">* Campos obligatorios</span>
+          </div>
+
+          <form id="applicationForm">
+            <div class="form-grid">
+              <div class="field full">
+                <label for="childDni">DNI del hijo o hija <i>*</i></label>
+                <input id="childDni" name="hijoDni" inputmode="numeric" maxlength="8" placeholder="Ej. 12345678" required>
+              </div>
+
+              <div class="field">
+                <label for="names">Nombres <i>*</i></label>
+                <input id="names" name="nombres" placeholder="Nombres del estudiante" required>
+              </div>
+
+              <div class="field">
+                <label for="lastnames">Apellidos <i>*</i></label>
+                <input id="lastnames" name="apellidos" placeholder="Apellidos del estudiante" required>
+              </div>
+            </div>
+
+            <div class="academic-box">
+              <div class="check-icon">✓</div>
+              <div class="academic-heading">
+                <strong>Situación académica</strong>
+                <p>Selecciona una sola opción.</p>
+              </div>
+              <div class="academic-options" role="radiogroup" aria-label="Situación académica">
+                <label class="academic-option">
+                  <input id="lastYear" name="situacionAcademica" type="radio" value="cursa" required>
+                  <span>Actualmente cursa <b>5.º de secundaria</b></span>
+                </label>
+                <label class="academic-option">
+                  <input id="finishedSecondary" name="situacionAcademica" type="radio" value="culmino">
+                  <span>Ya culminó <b>secundaria</b></span>
+                </label>
+              </div>
+              <div id="finishedYearField" class="field full hidden">
+                <label for="finishedYear">¿En qué año terminó secundaria? <i>*</i></label>
+                <input id="finishedYear" name="anioCulmino" inputmode="numeric" maxlength="4" placeholder="Ej. 2025">
+              </div>
+            </div>
+
+            <div id="formMessage" class="message"></div>
+
+            <div class="form-actions">
+              <button type="button" id="backBtn" class="ghost-btn">← Volver</button>
+              <button type="submit" class="primary-btn">Registrar inscripción <span>→</span></button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="successView" class="hidden success-wrap">
+        <div class="card success-card">
+          <div class="success-icon">✓</div>
+          <span class="card-label">INSCRIPCIÓN COMPLETADA</span>
+          <h1>¡Listo! Hemos recibido la inscripción.</h1>
+          <p>La información del estudiante fue registrada correctamente en el portal.</p>
+          <div class="code-box">
+            <span>CÓDIGO DE INSCRIPCIÓN</span>
+            <strong id="applicationCode"></strong>
+          </div>
+          <button id="newBtn" class="primary-btn">Registrar otro estudiante <span>→</span></button>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 Legado Bateas · Todos los derechos reservados</footer>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
