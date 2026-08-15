@@ -1,8 +1,3 @@
-/* ===================================================================
-   Legado Bateas · Portal de becas
-   Sistema visual sobrio / corporativo — la UI calla para que el logo hable.
-   =================================================================== */
-
 :root{
   --bg:#f3f6fb;
   --surface:#ffffff;
@@ -60,13 +55,13 @@ body::before{content:"";position:fixed;top:0;left:0;right:0;height:3px;backgroun
 
 /* ---------- Marca / logo ---------- */
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
-.brand-logo{height:52px;width:auto;object-fit:contain}
+.brand-logo{height:104px;width:auto;object-fit:contain}
 .brand strong{display:block;font-size:14px;font-weight:700;color:var(--ink);line-height:1.1}
 .brand span{display:block;font-size:11px;color:var(--muted);margin-top:2px}
 
 /* ---------- Barra superior ---------- */
 .topbar{
-  height:74px;background:var(--surface);
+  height:124px;background:var(--surface);
   border-bottom:1px solid var(--line);
   display:flex;align-items:center;justify-content:space-between;
   padding:0 clamp(16px,5vw,40px);
@@ -211,5 +206,5 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:11px;border-t
   .login-card,.form-card,.success-card{padding:22px}
   .form-actions{flex-direction:column}
   .form-actions .primary-btn{width:100%}
-  .brand-logo{height:44px}
+  .brand-logo{height:88px}
 }
